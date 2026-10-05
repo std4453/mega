@@ -1,6 +1,6 @@
 {
-  "name": "megajs",
-  "version": "1.3.10",
+  "name": "@std4453/megajs",
+  "version": "1.3.10-beta.0",
   "description": "Unofficial JavaScript SDK for MEGA",
   "main": "dist/main.node-cjs.js",
   "typings": "types/cjs.d.ts",
@@ -26,12 +26,13 @@
   },
   "files": [
     "dist",
-    "types"
+    "types",
+    "DOWNLOADS.md"
   ],
   "homepage": "https://mega.js.org/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/qgustavor/mega.git"
+    "url": "git+https://github.com/std4453/mega.git"
   },
   "keywords": [
     "mega",
@@ -50,7 +51,8 @@
     "lint-js-fix": "standard --fix",
     "lint-ts": "ts-standard",
     "lint-ts-fix": "ts-standard --fix",
-    "dist": "npm run test && npm run build"
+    "dist": "npm run test && npm run build",
+    "prepare": "npm run build"
   },
   "standard": {
     "ignore": [
@@ -60,13 +62,14 @@
   "ts-standard": {
     "files": "types/cjs.d.ts"
   },
-  "author": "Tõnis Tiigi <tonistiigi@gmail.com>",
+  "author": "T\u00f5nis Tiigi <tonistiigi@gmail.com>",
   "contributors": [
     "Gustavo Rodrigues (https://qgustavor.tk)"
   ],
   "license": "MIT",
   "publishConfig": {
-    "provenance": true
+    "access": "public",
+    "tag": "beta"
   },
   "dependencies": {
     "pumpify": "^2.0.1",

@@ -2,6 +2,11 @@
 
 Unofficial JavaScript SDK for MEGA
 
+This fork is published as **`@std4453/megajs`** on npm. See
+[DOWNLOADS.md](DOWNLOADS.md) for installation, bounded prefetch, and CloudRAID
+download options. The upstream API documentation below also applies when imports
+use `@std4453/megajs`.
+
 **API documentation and examples are available in the website: [https://mega.js.org/](https://mega.js.org/)**
 
 * This is based on [tonistiigi's mega library](https://github.com/tonistiigi/mega).

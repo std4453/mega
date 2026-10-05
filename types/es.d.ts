@@ -50,6 +50,7 @@ export declare class Storage extends EventEmitter {
 }
 
 export declare class API extends EventEmitter {
+  sid?: string
   fetch: typeof fetch
   gateway: string
   counterId: string
@@ -68,7 +69,7 @@ export declare class API extends EventEmitter {
   pull (sn: AbortController, retryno?: number): void
   wait (url: string, sn: AbortController): void
   defaultFetch (url: string, opts?: RequestInit): typeof fetch
-  request (json: JSON, cb?: (error: err, response?: JSON) => void, retryno?: number): Promise<JSON>
+  request (json: Record<string, unknown>, cb?: (error: err, response?: JSON) => void, retryno?: number): Promise<JSON>
 }
 
 export declare class File extends EventEmitter {
@@ -224,6 +225,8 @@ interface metaOpts {
   a?: BufferString
 }
 interface downloadOpts {
+  /** Request CloudRAID tickets and reconstruct any five of the six shards. */
+  cloudRaid?: boolean
   end?: number
   start?: number
   forceHttps?: boolean
