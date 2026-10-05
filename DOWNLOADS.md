@@ -29,7 +29,17 @@ The protocol layout is documented in MEGA's official webclient
 
 ## Build and consume
 
+This fork is published as `@std4453/megajs` with the `beta` dist-tag. Install a
+specific version to keep deployments reproducible:
+
+```sh
+npm install --save-exact @std4453/megajs@1.3.10-beta.0
+```
+
+Import from `@std4453/megajs` instead of `megajs`; the exported API is unchanged.
+AoI pins that registry version and commits its lockfile.
+
 `npm ci`, `npm test`, and `npm pack` build and validate all four bundles. `prepare`
-also builds the bundles when installing a Git dependency pinned to a commit.
-AoI pins the full commit SHA; its lockfile is committed with that dependency.
-No unpublished registry version or local tarball is required.
+builds the bundles before packing or publishing. Publish with
+`npm publish --access public --tag beta`; local publication does not attach
+provenance. Provenance can be requested explicitly from a supported CI runner.
