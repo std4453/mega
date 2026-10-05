@@ -39,7 +39,7 @@ test('CloudRAID reconstructs tails and unaligned ranges with any missing shard',
     for (let missing = 0; missing < 6; missing++) {
       for (const start of [0, Math.floor(size / 2)]) {
         const output = await downloadRange(shardFetch(data, missing), urls, start, size - 1, size, new AbortController().signal)
-        t.deepEqual(output, data.subarray(start))
+        t.is(output.toString('hex'), data.subarray(start).toString('hex'))
       }
     }
   }
@@ -84,7 +84,7 @@ test('prefetch replenishes the window after out-of-order chunks and keeps zero i
   await tick()
   t.is(pending.length, 6)
   for (let i = 3; i < 10; i++) { pending[i](); await tick() }
-  t.deepEqual(await result, data)
+  t.is((await result).toString('hex'), data.toString('hex'))
   t.true(ranges.every(([start, end]) => end - start + 1 === 32))
 })
 
@@ -95,7 +95,7 @@ test('download validates CloudRAID plaintext MAC and rejects corruption', async 
   encoder.end(Buffer.from(data))
   const ciphertext = await encrypted
   const options = { cloudRaid: true, maxConnections: 3, initialChunkSize: 8192, chunkSizeIncrement: 0, maxChunkSize: 8192 }
-  t.deepEqual(await fileWithFetch(ciphertext.length, shardFetch(ciphertext, 2), encoder.key).downloadBuffer(options), data)
+  t.is((await fileWithFetch(ciphertext.length, shardFetch(ciphertext, 2), encoder.key).downloadBuffer(options)).toString('hex'), data.toString('hex'))
   await t.throwsAsync(fileWithFetch(ciphertext.length, shardFetch(ciphertext, 2, true), encoder.key).downloadBuffer(options), { message: /MAC verification failed/ })
 })
 
@@ -164,7 +164,7 @@ test('a paused consumer bounds prefetch and resumes without losing chunks', asyn
   t.true(requests <= 5, 'three prefetched chunks plus the stream buffers')
   stream.resume()
   await done
-  t.deepEqual(Buffer.concat(output), data)
+  t.is(Buffer.concat(output).toString('hex'), data.toString('hex'))
 })
 
 test('ticket parsing preserves shard positions and rejects malformed arrays', t => {
