@@ -3,6 +3,8 @@
 name: Test library
 
 on:
+  pull_request:
+    branches: [ next ]
   push:
     branches: [ next ]
 

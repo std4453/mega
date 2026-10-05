@@ -56,6 +56,7 @@ declare namespace megajs {
   }
 
   export class API extends EventEmitter {
+    sid?: string
     fetch: Fetch
     gateway: string
     counterId: string
@@ -74,7 +75,7 @@ declare namespace megajs {
     pull (sn: AbortController, retryno?: number): void
     wait (url: fetch.RequestInfo, sn: AbortController): void
     defaultFetch (url: fetch.RequestInfo, opts?: fetch.RequestInit): Fetch
-    request (json: JSON, cb?: (error: err, response?: JSON) => void, retryno?: number): Promise<JSON>
+    request (json: Record<string, unknown>, cb?: (error: err, response?: JSON) => void, retryno?: number): Promise<JSON>
   }
 
   export class File extends EventEmitter {
@@ -229,6 +230,8 @@ declare namespace megajs {
       a?: BufferString
     }
     interface downloadOpts {
+      /** Request CloudRAID tickets and reconstruct any five of the six shards. */
+      cloudRaid?: boolean
       end?: number
       start?: number
       forceHttps?: boolean
